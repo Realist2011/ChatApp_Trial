@@ -6,13 +6,17 @@ const protectRoute =async(req,res,next)=>{
     try {
         console.log("yahan phassa ")
         // const token = req.cookies.jwt
-        const token =req.cookies.jwt
+        // const cookieValue = req.headers.cookie.split('=')[1];
+        // console.log(cookieValue)
+        console.log(req.headers.cookie)
+        // const token =await req.cookie.jwt
+        const token1 = await sessionStorage.getItem('jwt')
         console.log(`Token yeh hai-${token}`)
-        if(!token){
+        if(!token1){
             return res.status(401).json({error:"Unauthorized:No Token Provided"})
         }
 
-        const decoded = jwt.verify(token,process.env.JWT_SECRET)
+        const decoded = jwt.verify(token1,process.env.JWT_SECRET)
         if(!decoded){
             return res.status(401).json({error:"Unauthorized:Invalid Token"})
         }

@@ -10,14 +10,16 @@ const useLogout= ()=>{
         try {
           const res = await fetch("http://localhost:3000/api/auth/logout",{
             method:"GET",
-            headers:{"Content-Type":"application/json"}
+            headers:{"Content-Type":"application/json"},credentials: 'include'
           });
+          console.log("3",res.headers.getSetCookie())
           const data = await res.json()
           if(data.error){
             throw new Error(data.error)
           }
 
           localStorage.removeItem("chat-user");
+          sessionStorage.removeItem("jwt")
           setAuthUser(null)
 
         } catch (error) {

@@ -13,10 +13,10 @@ const useSignUp = () => {
     try {
         const res = await fetch("http://localhost:3000/api/auth/signup",{
             method:"POST",
-            headers:{"Content-Type":"application/json"},
+            headers:{"Content-Type":"application/json"},credentials: 'include',
             body:JSON.stringify({fullName,username,password,confirmPassword,gender})
         })
-
+        console.log("4",res.headers.getSetCookie())
         const data = await res.json();
         if(data.error){
             throw new Error(data.error)

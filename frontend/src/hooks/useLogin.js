@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuthContext } from '../context/AuthContext'
 import toast from 'react-hot-toast'
-import { Cookie } from 'express-session'
+// import { Cookie } from 'express-session'
 
 
 const useLogin = () => {
@@ -15,12 +15,15 @@ const useLogin = () => {
     try {
         const res = await fetch("http://localhost:3000/api/auth/login",{
             method:"POST",
-            headers:{"Content-Type":"application/json"},
+            headers:{"Content-Type":"application/json"},credentials: 'same-origin',
             credentials: "include",
             body:JSON.stringify({username,password})
         })
+        // console.log("oye bkl",res.cookie)
+        // console.log("2",res.headers.getSetCookie())
         const data = await res.json();
-        console.log("DATA",data)
+        console.log("DATA",data.token)
+        sessionStorage.setItem("jwt",JSON.stringify(data.token))
         if(data.error){
             throw new Error(data.error)
         }
