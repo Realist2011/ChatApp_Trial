@@ -16,7 +16,7 @@ const useSignUp = () => {
             headers:{"Content-Type":"application/json"},credentials: 'include',
             body:JSON.stringify({fullName,username,password,confirmPassword,gender})
         })
-        console.log("4",res.headers.getSetCookie())
+       
         const data = await res.json();
         if(data.error){
             throw new Error(data.error)
