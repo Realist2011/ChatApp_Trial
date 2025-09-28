@@ -12,7 +12,6 @@ const useLogout= ()=>{
             method:"GET",
             headers:{"Content-Type":"application/json"},credentials: 'include'
           });
-          console.log("3",res.headers.getSetCookie())
           const data = await res.json()
           if(data.error){
             throw new Error(data.error)
