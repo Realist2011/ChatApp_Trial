@@ -9,8 +9,6 @@ const useLogin = () => {
   const {setAuthUser}=useAuthContext()
   const login = async(username,password)=>{
     console.log(username,password);
-    const success = handleInputErrors(username,password)
-    if(!success) return 
     setLoading(true)
     try {
         const res = await fetch("http://localhost:3000/api/auth/login",{
@@ -19,8 +17,7 @@ const useLogin = () => {
             credentials: "include",
             body:JSON.stringify({username,password})
         })
-        // console.log("oye bkl",res.cookie)
-        // console.log("2",res.headers.getSetCookie())
+       
         const data = await res.json();
         console.log("DATA",data.token)
         sessionStorage.setItem("jwt",JSON.stringify(data.token))
@@ -28,8 +25,6 @@ const useLogin = () => {
             throw new Error(data.error)
         }
         localStorage.setItem("chat-user",JSON.stringify(data))
-        // localStorage.setItem("jwt",JSON.stringify(data.token))
-        // Cookie("jwt",data.token)
         setAuthUser(data)
     } catch (error) {
         toast.error(error.message)
@@ -46,19 +41,3 @@ const useLogin = () => {
 export default useLogin
 
 
-function handleInputErrors({username,password}){
-    // if( !username || !password ){
-    //     toast.error("PLease fill in all fields")
-    //     return false
-    // }
-    // if(password!= confirmPassword){
-    //     toast.error("Passwords don't match")
-    //     return false
-    // }
-    // if(password.length<6){
-    //     toast.error("Password must be atleast 6 characters")
-    //     return false 
-    // }
-
-    return true
-}
