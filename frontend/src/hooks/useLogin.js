@@ -19,7 +19,6 @@ const useLogin = () => {
         })
        
         const data = await res.json();
-        console.log("DATA",data.token)
         sessionStorage.setItem("jwt",JSON.stringify(data.token))
         if(data.error){
             throw new Error(data.error)
