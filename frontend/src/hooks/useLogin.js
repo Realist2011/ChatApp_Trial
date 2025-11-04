@@ -8,12 +8,11 @@ const useLogin = () => {
   const [loading,setLoading]= useState(false)
   const {setAuthUser}=useAuthContext()
   const login = async(username,password)=>{
-    console.log(username,password);
     setLoading(true)
     try {
         const res = await fetch("http://localhost:3000/api/auth/login",{
             method:"POST",
-            headers:{"Content-Type":"application/json"},credentials: 'same-origin',
+            headers:{"Content-Type":"application/json"},
             credentials: "include",
             body:JSON.stringify({username,password})
         })
