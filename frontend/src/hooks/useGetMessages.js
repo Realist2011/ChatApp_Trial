@@ -19,15 +19,11 @@ const useGetMessages = () => {
                     body:JSON.stringify({token:token_VAL})
                 });
                 const data = await res.json()
-                // console.log(data.newMessage)
                 if(data.error) throw new Error(data.error)
                  setMessages(data)
-
-
             }
             catch(error){
                 toast.error(error.message)
-
             }
             finally{
                 setLoading(false)
