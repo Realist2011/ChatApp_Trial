@@ -15,7 +15,6 @@ export const SocketContextProvider=({children})=>{
     const {authUser} = useAuthContext();
     useEffect(()=>{
         if(authUser){
-            console.log("yahan aaya ")
             const socket = io("http://localhost:3000",{query:{
                 userId:authUser._id
             }});
